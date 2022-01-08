@@ -1,0 +1,37 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.scoreboard {
+    flex: 1;
+    flex-direction: row;
+}
+
+.score {
+    width: 150px;
+    height: 150px;
+    border: solid;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+}
+
+#current-play {
+    font-size: 20px;
+}
+
+.button-panel {
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+}
+
+button {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+}

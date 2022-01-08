@@ -44,22 +44,22 @@ let playRound = ( playerSelection, computerWeapon ) => {
 }
 
 let game = () => {
-    for (let i = 0; i < 5; i++) {
-        let roundCompleted = false;
-        while (!roundCompleted) {
-            let playerChoice = prompt(`Round ${i + 1}: Enter 'rock,' 'paper,' or 'scissors'\n`)
-            try {
-                console.log(playRound(playerChoice, computerPlay()))
-                roundCompleted = true;
-            }
-            catch(err) {
-                if (err == 'Matching Weapons') {
-                    console.log(`Tie! You both selected ${playerChoice.toLowerCase()}.\n
-                    Try again.\n`)
-                } else if ( err == 'Invalid Input') {
-                    console.log('Invalid entry. Try again\n')
-                }
-            }          
+    const 
+
+    let roundCompleted = false;
+    while (!roundCompleted) {
+        let playerChoice = prompt(`Round ${i + 1}: Enter 'rock,' 'paper,' or 'scissors'\n`)
+        try {
+            console.log(playRound(playerChoice, computerPlay()))
+            roundCompleted = true;
         }
+        catch(err) {
+            if (err == 'Matching Weapons') {
+                console.log(`Tie! You both selected ${playerChoice.toLowerCase()}.\n
+                Try again.\n`)
+            } else if ( err == 'Invalid Input') {
+                console.log('Invalid entry. Try again\n')
+            }
+        }          
     }
 }
