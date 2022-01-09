@@ -1,3 +1,19 @@
+const playerScore = document.querySelector('.scoreboard .scorecard#player .score')
+const computerScore = document.querySelector('.scoreboard .scorecard#computer .score')
+const currentPlay = document.querySelector('.current-play .play')
+const roundWinner = document.querySelector('.current-play .winner span')
+const winnerBanner = document.querySelector('.winnerbanner')
+const container = document.querySelector('.container')
+
+const buttons = document.querySelectorAll('button')
+    buttons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            playRound(e.target.id, computerPlay())
+        })
+    })
+
+let playerCount = 0;
+let computerCount = 0;
 
 
 let computerPlay = () => {
@@ -5,11 +21,12 @@ let computerPlay = () => {
     return WEAPONS[Math.floor(Math.random() * 3)]
 }
 
-let playRound = ( playerSelection, computerWeapon ) => {
+let playRound = ( playerWeapon, computerWeapon ) => {
     let winner;
-    let playerWeapon = playerSelection.toLowerCase();
 
-    if ( playerWeapon == computerWeapon) throw 'Matching Weapons'
+    currentPlay.textContent = `${playerWeapon} vs. ${computerWeapon}`
+
+    if ( playerWeapon == computerWeapon) winner = 'tie'
 
     //compute winner
     if ( playerWeapon == 'rock') {
@@ -32,34 +49,25 @@ let playRound = ( playerSelection, computerWeapon ) => {
     } 
     else throw 'Invalid Input'
 
-    //debug
-    console.log('Winner: ' + winner)
-
-    let winnerWeapon = (winner == 'player' ? playerWeapon:computerWeapon);
-    let winnerStr = winnerWeapon[0].toUpperCase() + winnerWeapon.substring(1);
-    let loserWeapon = (winner == 'computer' ? playerWeapon:computerWeapon);
-    let loserStr = loserWeapon[0].toUpperCase() + loserWeapon.substring(1);
-
-    return `You ${(winner == 'player' ? 'Win':'Lose')}!\n${winnerStr} beats ${loserStr}\n`;
+    roundWinner.textContent = winner
+    updateGame(winner)
 }
 
-let game = () => {
-    const 
-
-    let roundCompleted = false;
-    while (!roundCompleted) {
-        let playerChoice = prompt(`Round ${i + 1}: Enter 'rock,' 'paper,' or 'scissors'\n`)
-        try {
-            console.log(playRound(playerChoice, computerPlay()))
-            roundCompleted = true;
-        }
-        catch(err) {
-            if (err == 'Matching Weapons') {
-                console.log(`Tie! You both selected ${playerChoice.toLowerCase()}.\n
-                Try again.\n`)
-            } else if ( err == 'Invalid Input') {
-                console.log('Invalid entry. Try again\n')
-            }
-        }          
+let updateGame = (winner) => {
+    if (winner === 'computer') {
+        computerCount++
+        computerScore.textContent = computerCount
     }
+    else if (winner === 'player') {
+        playerCount++
+        playerScore.textContent = playerCount
+    } 
+    if (computerCount >= 5 || playerCount >= 5) {
+        let winner = (computerCount > playerCount) ? 'Computer': 'Player'
+        let endGame = document.createElement('div')
+        endGame.textContent = `${winner} wins!`
+        container.appendChild(endGame)
+    }
+    
 }
+

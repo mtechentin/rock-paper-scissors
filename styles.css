@@ -34,8 +34,12 @@
 }
 
 .current-play {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 150px;
-    font-size: 40px;
+    font-size: 20px;
 }
 
 .button-panel {
